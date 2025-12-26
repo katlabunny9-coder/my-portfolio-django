@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero">
+    <img src="{% static 'images/profile.jpg' %}" class="profile-img">
+
+    <h1>Hi, I'm Bunny</h1>
+
+    <p class="hero-text">
+        Python & Django Developer • Data • Software Testing
+    </p>
+
+    <div class="hero-buttons">
+        <a href="/projects/" class="btn-primary">View Projects</a>
+        <a href="/contact/" class="btn-secondary">Hire Me</a>
+    </div>
+</section>
+{% endblock %}

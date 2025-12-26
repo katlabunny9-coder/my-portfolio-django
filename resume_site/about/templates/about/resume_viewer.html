@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2 class="page-title">My Resume</h2>
+<div class="divider"></div>
+
+<div class="resume-container">
+
+    <iframe
+        src="{% static 'resume/resume.pdf' %}"
+        class="resume-frame">
+    </iframe>
+
+    <div class="resume-buttons">
+        <a href="{% static 'resume/resume.pdf' %}"
+           download
+           class="resume-download">
+           ⬇ Download Resume
+        </a>
+
+        <a href="{% static 'resume/resume.pdf' %}"
+           target="_blank"
+           class="resume-open">
+           🔎 Open in Full Screen
+        </a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="text-align:center;">Certificates</h2>
+
+<div class="carousel-wrapper">
+    <button class="nav-btn left" onclick="scrollLeft()">❮</button>
+
+    <div class="carousel" id="certCarousel">
+        {% for cert in certs %}
+        {% if cert.image %}
+        <div class="carousel-card">
+            <img src="{{ cert.image.url }}"
+                 onclick="openModal({{ forloop.counter0 }})">
+            <h4>{{ cert.title }}</h4>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <button class="nav-btn right" onclick="scrollRight()">❯</button>
+</div>
+
+<!-- MODAL -->
+<div id="imgModal" class="modal">
+    <span class="close" onclick="closeModal()">×</span>
+    <button class="modal-nav left" onclick="prevImg()">❮</button>
+    <img id="modalImg">
+    <button class="modal-nav right" onclick="nextImg()">❯</button>
+</div>
+
+<script>
+const images = [
+    {% for cert in certs %}
+        {% if cert.image %}
+            "{{ cert.image.url }}",
+        {% endif %}
+    {% endfor %}
+];
+
+let currentIndex = 0;
+
+function openModal(index) {
+    currentIndex = index;
+    document.getElementById("modalImg").src = images[currentIndex];
+    document.getElementById("imgModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("imgModal").style.display = "none";
+}
+
+function nextImg() {
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("modalImg").src = images[currentIndex];
+}
+
+function prevImg() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("modalImg").src = images[currentIndex];
+}
+
+function scrollRight() {
+    document.getElementById("certCarousel").scrollLeft += 320;
+}
+
+function scrollLeft() {
+    document.getElementById("certCarousel").scrollLeft -= 320;
+}
+</script>
+{% endblock %}
